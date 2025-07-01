@@ -11,7 +11,7 @@ body {
     user-select: none;
     background-color: #36393f;
     /* 変更点: 全体のフォントサイズを少し大きく */
-    font-size: 16px; /* PCでの基本サイズを指定 */
+    font-size: 18px; /* PCでの基本サイズを指定 */
 }
 
 /* Discord風カラーテーマ */
