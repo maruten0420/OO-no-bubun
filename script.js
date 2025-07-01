@@ -115,33 +115,30 @@ const checkAnswer = (choiceIndex) => {
     
     const quiz = shuffledQuizzes[currentQuestionIndex];
     const selectedOption = shuffledOptions[choiceIndex];
-    const isCorrect = selectedOption.originalIndex === quiz.a;
+    // ★ 修正点1: 正解のインデックスを「quiz.a」から「0」に固定
+    const isCorrect = selectedOption.originalIndex === 0;
     
     const reactionContainer = currentLogItem.querySelector('.reactions-container');
     
-    // リアクションを追加
     reactionContainer.innerHTML += `<span class="reaction">${emojiMap[choiceIndex]}</span>`;
     
     if (isCorrect) {
         score++;
         if(seCorrect) seCorrect.triggerAttackRelease('C5', '0.1s');
         reactionContainer.innerHTML += `<span class="reaction">⭕</span>`;
-        // 正解したボタンを緑色に
         answerButtons[choiceIndex].classList.remove('discord-button-secondary');
         answerButtons[choiceIndex].classList.add('bg-green-600');
-
-        // ★★★【重要】消えていた報酬処理をここに戻します ★★★
-        const timeBonus = Math.max(3 - 0.1 * score, 0.5);
+        const timeBonus = Math.max(5 - 0.05 * score, 0.5);
         timeLeft = Math.min(timeLeft + timeBonus, initialTime);
         
     } else {
         if(seIncorrect) seIncorrect.triggerAttackRelease('C3', '0.2s');
         reactionContainer.innerHTML += `<span class="reaction">❌</span>`;
-        // 不正解のボタンを赤色に
         answerButtons[choiceIndex].classList.remove('discord-button-secondary');
         answerButtons[choiceIndex].classList.add('bg-red-600');
-        // 正解のボタンをハイライト
-        const correctBtnIndex = shuffledOptions.findIndex(opt => opt.originalIndex === quiz.a);
+        
+        // ★ 修正点2: 正解ボタンを探す際もインデックスを「0」に固定
+        const correctBtnIndex = shuffledOptions.findIndex(opt => opt.originalIndex === 0);
         answerButtons[correctBtnIndex].classList.remove('discord-button-secondary');
         answerButtons[correctBtnIndex].classList.add('bg-green-600');
     }
