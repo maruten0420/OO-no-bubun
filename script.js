@@ -125,19 +125,19 @@ const checkAnswer = (choiceIndex) => {
         if(seCorrect) seCorrect.triggerAttackRelease('C5', '0.1s');
         reactionContainer.innerHTML += `<span class="reaction">⭕</span>`;
         // 正解したボタンを緑色に
+        answerButtons[choiceIndex].classList.remove('discord-button-secondary'); // この行を追加
         answerButtons[choiceIndex].classList.add('bg-green-600');
-        // 時間をボーナス
-        const timeBonus = Math.max(5 - 0.05 * score, 0.5);
-        timeLeft = Math.min(timeLeft + timeBonus, initialTime);
     } else {
         if(seIncorrect) seIncorrect.triggerAttackRelease('C3', '0.2s');
         reactionContainer.innerHTML += `<span class="reaction">❌</span>`;
         // 不正解のボタンを赤色に
+        answerButtons[choiceIndex].classList.remove('discord-button-secondary'); // この行を追加
         answerButtons[choiceIndex].classList.add('bg-red-600');
         // 正解のボタンをハイライト
         const correctBtnIndex = shuffledOptions.findIndex(opt => opt.originalIndex === quiz.a);
+        answerButtons[correctBtnIndex].classList.remove('discord-button-secondary'); // この行を追加
         answerButtons[correctBtnIndex].classList.add('bg-green-600');
-    }
+}
 
     updateScoreDisplay();
 
