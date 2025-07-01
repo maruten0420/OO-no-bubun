@@ -90,7 +90,8 @@ const showQuestion = () => {
     });
     
     const quiz = shuffledQuizzes[currentQuestionIndex];
-    shuffledOptions = quiz.o.map((text, originalIndex) => ({ text, originalIndex })).sort(() => Math.random() - 0.5);
+    // ★ 修正点1: 選択肢のテキストに「の部分」を追加
+    shuffledOptions = quiz.o.map((text, originalIndex) => ({ text: `${text}の部分`, originalIndex })).sort(() => Math.random() - 0.5);
     
     answerButtons.forEach((btn, i) => {
         btn.innerHTML = `<span>${emojiMap[i]}</span><span>${shuffledOptions[i].text}</span>`;
@@ -99,7 +100,8 @@ const showQuestion = () => {
     // 問題をDiscord風メッセージとして表示
     currentLogItem = createLogItem();
     const messageContent = currentLogItem.querySelector('.message-content');
-    messageContent.innerHTML += `<p class="message-text">${currentQuestionIndex + 1}. ${quiz.q}</p>`;
+    // ★ 修正点2: 問題文に「 の……」を追加
+    messageContent.innerHTML += `<p class="message-text">${currentQuestionIndex + 1}. ${quiz.q} の……</p>`;
     messageContent.innerHTML += `<div class="reactions-container"></div>`;
     
     limitQuestionLog();
