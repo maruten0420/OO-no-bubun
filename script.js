@@ -22,7 +22,8 @@ const answerButtons = document.querySelectorAll('.answer-btn');
 
 // --- ゲーム状態変数 ---
 let currentQuestionIndex = 0, score = 0, timer, timeLeft = 0;
-const initialTime = 20, MAX_LOG_ITEMS = 10; // ログの最大表示数を調整
+const initialTime = 20;
+let maxVisibleLogs = 10; // デフォルト値。ゲーム開始時に再計算される
 let shuffledQuizzes = [], shuffledOptions = [], acceptingAnswers = true, currentLogItem;
 const emojiMap = ["1️⃣", "2️⃣", "3️⃣"];
 let bgm, seCorrect, seIncorrect, bgmVolume, seVolume;
@@ -43,12 +44,43 @@ const switchScreen = (activeScreen) => {
     activeScreen.classList.add('active');
 };
 
+// 表示可能なログの最大数を計算して設定する関数
+const calculateAndSetMaxLogs = () => {
+    const container = questionLogContainer;
+    // コンテナが表示されていない、または高さがない場合は計算しない
+    if (!container || container.clientHeight === 0) return;
+
+    // 高さ測定のための一時的なログ要素を作成
+    const tempItem = document.createElement('div');
+    tempItem.className = 'question-log-item';
+    tempItem.style.position = 'absolute'; // 画面レイアウトに影響を与えないように
+    tempItem.style.visibility = 'hidden'; // 見えないように
+    tempItem.innerHTML = `
+        <div style="width: 40px; height: 40px; margin-right: 1rem; flex-shrink: 0;"></div>
+        <div class="message-content">
+            <div class="user-info"><span>.</span></div>
+            <p class="message-text">.</p>
+        </div>
+    `;
+
+    document.body.appendChild(tempItem);
+    const itemHeight = tempItem.offsetHeight; // 1件あたりの高さを取得
+    document.body.removeChild(tempItem);   // 測定用の要素を削除
+
+    // 実際のコンテナの高さから、表示可能な件数を算出
+    if (itemHeight > 0) {
+        maxVisibleLogs = Math.floor(container.clientHeight / itemHeight);
+    }
+};
+
 // --- ゲームロジック ---
 const startGame = async () => {
     // Tone.jsのコンテキストを開始
     if (Tone.context.state !== 'running') await Tone.start();
     
     switchScreen(gameScreen);
+    calculateAndSetMaxLogs();
+    
     questionLogContainer.innerHTML = '';
     shuffledQuizzes = shuffleArray(quizzes);
     currentQuestionIndex = 0; score = 0;
@@ -239,3 +271,4 @@ settingsBtn.addEventListener('click', () => settingsModal.classList.remove('hidd
 closeSettingsBtn.addEventListener('click', () => settingsModal.classList.add('hidden'));
 bgmVolumeSlider.addEventListener('input', updateBgmVolume);
 seVolumeSlider.addEventListener('input', updateSeVolume);
+window.addEventListener('resize', calculateAndSetMaxLogs);
