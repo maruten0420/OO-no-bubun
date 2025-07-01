@@ -79,7 +79,7 @@ const startGame = async () => {
     if (Tone.context.state !== 'running') await Tone.start();
     
     switchScreen(gameScreen);
-    calculateAndSetMaxLogs();
+    setTimeout(calculateAndSetMaxLogs, 0);
     
     questionLogContainer.innerHTML = '';
     shuffledQuizzes = shuffleArray(quizzes);
