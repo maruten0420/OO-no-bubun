@@ -13,6 +13,7 @@ const retryBtn = document.getElementById('retry-btn');
 const rulesBtn = document.getElementById('rules-btn');
 const rulesModal = document.getElementById('rules-modal');
 const closeRulesBtn = document.getElementById('close-rules-btn');
+const backToTitleBtn = document.getElementById('back-to-title-btn');
 const tweetBtn = document.getElementById('tweet-btn');
 const questionCounter = document.getElementById('question-counter');
 const scoreDisplay = document.getElementById('score-display');
@@ -228,6 +229,7 @@ const handleKeyPress = (e) => {
 
 startBtn.addEventListener('click', () => { initAudio(); startGame(); });
 retryBtn.addEventListener('click', startGame);
+backToTitleBtn.addEventListener('click', () => switchScreen(startScreen));
 tweetBtn.addEventListener('click', () => { 
     const text = `私は○○の○○の部分3択クイズに ${score} 問正解しました！\n↓このリンクからあなたもチャレンジ！↓`;
     const url = "https://maruten0420.github.io/OO-no-bubun/";
