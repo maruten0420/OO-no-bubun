@@ -10,6 +10,9 @@ const startBtn = document.getElementById('start-btn');
 const settingsBtn = document.getElementById('settings-btn');
 const closeSettingsBtn = document.getElementById('close-settings-btn');
 const retryBtn = document.getElementById('retry-btn');
+const rulesBtn = document.getElementById('rules-btn');
+const rulesModal = document.getElementById('rules-modal');
+const closeRulesBtn = document.getElementById('close-rules-btn');
 const tweetBtn = document.getElementById('tweet-btn');
 const questionCounter = document.getElementById('question-counter');
 const scoreDisplay = document.getElementById('score-display');
@@ -232,6 +235,8 @@ tweetBtn.addEventListener('click', () => {
 });
 document.addEventListener('keydown', handleKeyPress);
 answerButtons.forEach((btn) => btn.addEventListener('click', (e) => checkAnswer(parseInt(e.currentTarget.dataset.choiceIndex))));
+rulesBtn.addEventListener('click', () => rulesModal.classList.remove('hidden'));
+closeRulesBtn.addEventListener('click', () => rulesModal.classList.add('hidden'));
 settingsBtn.addEventListener('click', () => settingsModal.classList.remove('hidden'));
 closeSettingsBtn.addEventListener('click', () => settingsModal.classList.add('hidden'));
 bgmVolumeSlider.addEventListener('input', updateBgmVolume);
