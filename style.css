@@ -140,3 +140,27 @@ body {
 .answer-btn:active {
     transform: scale(0.95);
 }
+
+/* スマホなど、画面幅が640px以下の narrower な場合に適用 */
+@media (max-width: 640px) {
+
+    /* --- 選択肢の修正 --- */
+    /* コンテナを縦並びのレイアウトに変更 */
+    #answer-footer {
+        display: flex;
+        flex-direction: column; /* ボタンを縦一列に並べる */
+        gap: 0.5rem; /* ボタン間の少しの隙間 */
+    }
+
+    /* ボタンの横幅を100%に */
+    .answer-btn {
+        width: 100%;
+    }
+
+    /* --- ルールモーダルの修正 --- */
+    /* ルール説明のコンテナをスクロール可能に */
+    #rules-modal .discord-bg-secondary > div:first-of-type {
+         overflow-y: auto; /* 縦方向に内容がはみ出たらスクロールバーを表示 */
+         max-height: 70vh; /* 画面の高さの70%を最大高に設定 */
+    }
+}
