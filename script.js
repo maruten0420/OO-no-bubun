@@ -144,7 +144,7 @@ const checkAnswer = (choiceIndex) => {
     setTimeout(() => {
         currentQuestionIndex++;
         if (currentQuestionIndex < shuffledQuizzes.length) { 
-            timeLeft = initialTime; // 次の問題のためにタイマーをリセット
+            //timeLeft = initialTime; // 次の問題のためにタイマーをリセット
             showQuestion(); 
         } else { 
             endGame(); 
