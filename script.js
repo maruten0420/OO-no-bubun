@@ -182,9 +182,9 @@ const createLogItem = () => {
     logItem.className = 'question-log-item';
     
     // p-colon.png がない場合のためのフォールバック
-    const iconHTML = `<img src="p-colon.png" alt="icon" class="user-icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                      <div style="display:none; width: 40px; height: 40px; border-radius: 50%; background-color: #7289da; color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0; margin-right: 1rem;">P</div>`;
-
+    const iconHTML = `<img src="p-colon.png" alt="icon" class="user-icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                  <div style="width: 40px; height: 40px; border-radius: 50%; background-color: #7289da; color: white; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0; margin-right: 1rem; display: none;">P</div>`;
+    
     logItem.innerHTML = `
         ${iconHTML}
         <div class="message-content">
