@@ -76,6 +76,46 @@
         </div>
     </div>
 
+    <!--ルールタブを追加-->
+<div id="start-screen" class="screen active flex-col items-center justify-center text-center p-4">
+    <h1 class="text-5xl font-bold mb-4">○○の○○の部分 3択クイズ</h1>
+    <button id="start-btn" class="discord-button text-white font-bold py-3 px-8 rounded-lg text-xl w-full sm:w-auto">スタート</button>
+    <button id="settings-btn" class="discord-button-secondary text-white font-bold py-3 px-8 rounded-lg text-xl mt-4 w-full sm:w-auto">設定</button>
+</div>
+
+<div id="start-screen" class="screen active flex-col items-center justify-center text-center p-4">
+    <h1 class="text-5xl font-bold mb-4">○○の○○の部分 3択クイズ</h1>
+    <button id="start-btn" class="discord-button text-white font-bold py-3 px-8 rounded-lg text-xl w-full sm:w-auto">スタート</button>
+    <button id="rules-btn" class="discord-button-secondary text-white font-bold py-3 px-8 rounded-lg text-xl mt-4 w-full sm:w-auto">ルール</button>
+    <button id="settings-btn" class="discord-button-secondary text-white font-bold py-3 px-8 rounded-lg text-xl mt-4 w-full sm:w-auto">設定</button>
+</div>
+
+<div id="rules-modal" class="hidden fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-4">
+    <div class="discord-bg-secondary p-8 rounded-lg shadow-xl w-11/12 max-w-lg">
+        <h2 class="text-2xl font-bold mb-6 text-center">ルール</h2>
+        <div class="text-left space-y-4 text-base">
+            <p>問題文の単語の中に隠れている別の単語を、3つの選択肢の中から選んでください。キーボードの数字キー(1, 2, 3)でも回答できます。</p>
+            
+            <ul class="list-disc list-inside space-y-2 pl-2">
+                <li><strong>濁音・半濁音</strong>: 「が」を「か」にするなど、点々(゛)や丸(゜)を付けたり外したりはできません。<br><span class="text-sm text-gray-400 ml-4">(例: 骸骨 → ○ 遺骨, × 蚕)</span></li>
+                <li><strong>長音(伸ばし棒「ー」)</strong>: 「ー」のまま扱ったり、母音(あいうえお)に変換して使えます。ただし、省略はできません。<br><span class="text-sm text-gray-400 ml-4">(例: ボンバーガール → ○ バーガー, ○ 上がる, × ガル)</span></li>
+                <li><strong>拗音(ゃ, ゅ, ょ)</strong>: 小さい仮名を大きい仮名にはできません。<br><span class="text-sm text-gray-400 ml-4">(例: 活発 → ○ カッパ, × カツ)</span></li>
+                <li><strong>特殊な仮名(ぢ, づ, ゔ)</strong>: 音が同じでも「じ, ず」とは別の文字として扱います。</li>
+            </ul>
+
+            <p class="text-sm text-gray-400 border-t border-gray-600 pt-3">
+                ※ 専門用語: DH固定・C母音化あり・Y連結・VD変なし
+            </p>
+
+            <div class="border-t border-gray-600 pt-3">
+                <p class="font-bold">【ゲームのヒント】</p>
+                <p>正解すると残り時間にボーナスが加算されます。素早く正確に答えてハイスコアを目指しましょう！</p>
+            </div>
+        </div>
+        <button id="close-rules-btn" class="discord-button text-white font-bold py-2 px-6 rounded-lg w-full mt-8">閉じる</button>
+    </div>
+</div>
+
     <!-- 作成したJSファイルを読み込む (type="module" が重要) -->
     <script type="module" src="script.js"></script>
 </body>
