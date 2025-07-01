@@ -229,8 +229,8 @@ const handleKeyPress = (e) => {
 startBtn.addEventListener('click', () => { initAudio(); startGame(); });
 retryBtn.addEventListener('click', startGame);
 tweetBtn.addEventListener('click', () => { 
-    const text = `私は3択クイズに ${score} 問正解しました！`;
-    const url = "YOUR_GAME_URL"; // GitHub PagesのURLなどをここに設定
+    const text = `私は○○の○○の部分3択クイズに ${score} 問正解しました！\n↓このリンクからあなたもチャレンジ！↓`;
+    const url = "https://maruten0420.github.io/OO-no-bubun/";
     window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`, '_blank'); 
 });
 document.addEventListener('keydown', handleKeyPress);
