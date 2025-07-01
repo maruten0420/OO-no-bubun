@@ -106,8 +106,6 @@ const showQuestion = () => {
     questionCounter.textContent = `Q${currentQuestionIndex + 1}`;
 };
 
-// script.jsのcheckAnswer関数をまるごとこちらに置き換えてください
-
 const checkAnswer = (choiceIndex) => {
     if (!acceptingAnswers) return;
     acceptingAnswers = false;
@@ -131,7 +129,7 @@ const checkAnswer = (choiceIndex) => {
         answerButtons[choiceIndex].classList.add('bg-green-600');
 
         // ★★★【重要】消えていた報酬処理をここに戻します ★★★
-        const timeBonus = Math.max(5 - 0.05 * score, 0.5);
+        const timeBonus = Math.max(3 - 0.1 * score, 0.5);
         timeLeft = Math.min(timeLeft + timeBonus, initialTime);
         
     } else {
