@@ -238,7 +238,7 @@ const createLogItem = () => {
 };
 
 const limitQuestionLog = () => {
-    while (questionLogContainer.children.length > MAX_LOG_ITEMS) {
+    while (questionLogContainer.children.length > maxVisibleLogs) {
         questionLogContainer.removeChild(questionLogContainer.lastChild);
     }
 };
