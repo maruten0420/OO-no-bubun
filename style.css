@@ -125,6 +125,30 @@ body {
     border-top: 1px solid #42454a;
 }
 
+/* リアクションの基本スタイル */
+.reaction {
+    display: inline-flex;
+    align-items: center;
+    background-color: #2f3136; /* 基本の内部色 */
+    border: 1px solid #3a3d42; /* 基本の枠色 */
+    border-radius: 0.75rem;
+    padding: 0.2rem 0.6rem;
+    font-size: 1rem;
+    line-height: 1;
+    gap: 0.25rem; /* 絵文字と数字の間隔 */
+}
+
+/* 数字のスタイル */
+.reaction-count {
+    color: rgb(185, 199, 255);
+    font-weight: 500;
+}
+
+/* ユーザーが選択した選択肢のリアクション用の特別スタイル */
+.user-choice-reaction {
+    background-color: rgb(41, 44, 81); /* 指定された内部色 */
+    border-color: rgb(88, 101, 242);  /* 指定された枠色 */
+}
 /* --- スマホ向けのスタイル --- */
 /* 画面幅が640px以下の場合に適用 */
 @media (max-width: 640px) {
