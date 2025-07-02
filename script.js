@@ -112,6 +112,8 @@ const showQuestion = () => {
     questionCounter.textContent = `Q${currentQuestionIndex + 1}`;
 };
 
+// checkAnswer関数をまるごとこちらに置き換えてください
+
 const checkAnswer = (choiceIndex) => {
     if (!acceptingAnswers) return;
     acceptingAnswers = false;
@@ -119,29 +121,48 @@ const checkAnswer = (choiceIndex) => {
     
     const quiz = shuffledQuizzes[currentQuestionIndex];
     const selectedOption = shuffledOptions[choiceIndex];
-    // ★ 修正点1: 正解のインデックスを「quiz.a」から「0」に固定
     const isCorrect = selectedOption.originalIndex === 0;
     
     const reactionContainer = currentLogItem.querySelector('.reactions-container');
     
-    reactionContainer.innerHTML += `<span class="reaction">${emojiMap[choiceIndex]}</span>`;
-    
+    // --- リアクション生成ロジック ---
+
+    // 1. ユーザーが選択した選択肢のリアクション
+    //    CSSで色を変えるため、特別なクラスを付与
+    const userChoiceReaction = `<span class="reaction user-choice-reaction">${emojiMap[choiceIndex]}<span class="reaction-count">1</span></span>`;
+    reactionContainer.innerHTML += userChoiceReaction;
+
+    // 2. 正解・不正解のリアクション
+    const resultEmoji = isCorrect ? '⭕' : '❌';
+    const resultReaction = `<span class="reaction">${resultEmoji}<span class="reaction-count">1</span></span>`;
+    reactionContainer.innerHTML += resultReaction;
+
+    // 3. 25%の確率で追加のリアクション
+    if (Math.random() < 0.25) {
+        const extraEmojis = isCorrect 
+            ? ['🎉', '👍', '😊', '🥳'] // 正解時の絵文字候補
+            : ['😢', '😭', '🤔'];   // 不正解時の絵文字候補
+        
+        const extraEmoji = extraEmojis[Math.floor(Math.random() * extraEmojis.length)];
+        const extraReaction = `<span class="reaction">${extraEmoji}<span class="reaction-count">1</span></span>`;
+        reactionContainer.innerHTML += extraReaction;
+    }
+
+    // --- ここまでリアクション生成ロジック ---
+
     if (isCorrect) {
         score++;
         if(seCorrect) seCorrect.triggerAttackRelease('C5', '0.1s');
-        reactionContainer.innerHTML += `<span class="reaction">⭕</span>`;
         answerButtons[choiceIndex].classList.remove('discord-button-secondary');
         answerButtons[choiceIndex].classList.add('bg-green-600');
-        const timeBonus = Math.max(5 - 0.1 * score, 2 - (0.01 * (Math.max(0, score - 25))), 1.25);
+        const timeBonus = Math.max(5 - 0.1 * score, 1 - (0.01 * (Math.max(0, score - 25))), 0.5);
         timeLeft = Math.min(timeLeft + timeBonus, initialTime);
         
     } else {
         if(seIncorrect) seIncorrect.triggerAttackRelease('C3', '0.2s');
-        reactionContainer.innerHTML += `<span class="reaction">❌</span>`;
         answerButtons[choiceIndex].classList.remove('discord-button-secondary');
         answerButtons[choiceIndex].classList.add('bg-red-600');
         
-        // ★ 修正点2: 正解ボタンを探す際もインデックスを「0」に固定
         const correctBtnIndex = shuffledOptions.findIndex(opt => opt.originalIndex === 0);
         answerButtons[correctBtnIndex].classList.remove('discord-button-secondary');
         answerButtons[correctBtnIndex].classList.add('bg-green-600');
