@@ -26,7 +26,7 @@ const answerButtons = document.querySelectorAll('.answer-btn');
 
 // --- ゲーム状態変数 ---
 let currentQuestionIndex = 0, score = 0, timer, timeLeft = 0;
-const initialTime = 10, MAX_LOG_ITEMS = 10; // ログの最大表示数を調整
+const initialTime = 1, MAX_LOG_ITEMS = 10; // ログの最大表示数を調整
 let shuffledQuizzes = [], shuffledOptions = [], acceptingAnswers = true, currentLogItem;
 const emojiMap = ["1️⃣", "2️⃣", "3️⃣"];
 let bgm, seCorrect, seIncorrect, bgmVolume, seVolume;
