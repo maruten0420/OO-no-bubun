@@ -26,7 +26,7 @@ const answerButtons = document.querySelectorAll('.answer-btn');
 
 // --- ゲーム状態変数 ---
 let currentQuestionIndex = 0, score = 0, timer, timeLeft = 0;
-const initialTime = 1, MAX_LOG_ITEMS = 10; // ログの最大表示数を調整
+const initialTime = 10, MAX_LOG_ITEMS = 10; // ログの最大表示数を調整
 let shuffledQuizzes = [], shuffledOptions = [], acceptingAnswers = true, currentLogItem;
 const emojiMap = ["1️⃣", "2️⃣", "3️⃣"];
 let bgm, seCorrect, seIncorrect, bgmVolume, seVolume;
@@ -132,7 +132,7 @@ const checkAnswer = (choiceIndex) => {
         reactionContainer.innerHTML += `<span class="reaction">⭕</span>`;
         answerButtons[choiceIndex].classList.remove('discord-button-secondary');
         answerButtons[choiceIndex].classList.add('bg-green-600');
-        const timeBonus = Math.max(3 - 0.1 * score, 1 - (0.01 * (Math.max(0, score - 25))), 0.5);
+        const timeBonus = Math.max(5 - 0.1 * score, 2 - (0.01 * (Math.max(0, score - 25))), 1.25);
         timeLeft = Math.min(timeLeft + timeBonus, initialTime);
         
     } else {
