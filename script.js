@@ -132,7 +132,7 @@ const checkAnswer = (choiceIndex) => {
         reactionContainer.innerHTML += `<span class="reaction">⭕</span>`;
         answerButtons[choiceIndex].classList.remove('discord-button-secondary');
         answerButtons[choiceIndex].classList.add('bg-green-600');
-        const timeBonus = Math.max(5 - 0.1 * score, 1 - (0.01 * (Math.max(0, score - 25))), 0.5);
+        const timeBonus = Math.max(3 - 0.1 * score, 1 - (0.01 * (Math.max(0, score - 25))), 0.5);
         timeLeft = Math.min(timeLeft + timeBonus, initialTime);
         
     } else {
